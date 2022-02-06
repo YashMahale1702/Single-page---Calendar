@@ -1,0 +1,144 @@
+//* MEDIA QUERY MANAGER
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		//*600px
+		@media only screen and (max-width: 37.5em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-port {
+		//*900px
+		@media only screen and (max-width: 56.25em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-land {
+		//*1200px
+		@media only screen and (max-width: 75em) {
+			@content;
+		}
+	}
+	@if $breakpoint == big-desktop {
+		//*1800px
+		@media only screen and (min-width: 112.5em) {
+			@content;
+		}
+	}
+}
+
+// Actual CSS starts here
+//General and necessary styling
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	// *  1 rem : 10px
+
+	@include respond(big-desktop) {
+		// *1 rem : 12px  beyond 1200
+		font-size: 75%;
+	}
+
+	@include respond(tab-land) {
+		// *1 rem : 9px  1200px
+		font-size: 56.25%;
+	}
+
+	@include respond(tab-port) {
+		// *1 rem : 8px  900px
+		font-size: 50%;
+	}
+
+	@include respond(phone) {
+		// *1 rem : 6px 600px
+		font-size: 37.5%;
+	}
+}
+
+body {
+	background-image: linear-gradient(to right bottom, rgba(#000, 0.4), rgba(#000, 0.6)), url('../images/scene_1.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 100%;
+}
+
+.container {
+	font-size: 1.6rem;
+	font-family: 'Quicksand', sans-serif;
+	color: black;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-transform: uppercase;
+	text-align: center;
+	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(3px);
+	border-radius: 2rem;
+	padding: 1rem 3rem;
+
+	&--1 {
+		padding: 2rem 4rem 2.5rem 4rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.month {
+			font-size: 4.5rem;
+			font-weight: 400;
+			position: relative;
+			color: transparent;
+			background-clip: text;
+			-webkit-background-clip: text;
+			background-image: linear-gradient(to right, #30cfd0 20%, #d57eeb);
+
+			//* Special Animation
+			&:hover::after {
+				transform: scaleX(1);
+				transform-origin: center;
+			}
+
+			&::after {
+				content: '';
+				background-image: linear-gradient(to right, #30cfd0, #d57eeb);
+				position: absolute;
+				height: 1.5px;
+				width: 100%;
+				bottom: 0;
+				left: 0;
+				transform: scaleX(0);
+				transition: all 0.4s ease;
+			}
+		}
+	}
+
+	&--2 {
+		padding: 2rem 4rem 2.5rem 4rem;
+
+		.year {
+			font-size: 3rem;
+			font-weight: 500;
+			margin-bottom: 2rem;
+		}
+
+		.date {
+			font-size: 8rem;
+			font-weight: 500;
+			margin-bottom: 1.5rem;
+		}
+
+		.day {
+			font-size: 4.2rem;
+			font-weight: 400;
+		}
+	}
+}
